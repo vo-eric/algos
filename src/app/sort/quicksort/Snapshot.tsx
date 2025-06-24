@@ -87,6 +87,7 @@ export default function Snapshot({
       }}
     >
       <div className="flex flex-col gap-4">
+        <p className="text-center">[{[pivot, ...array].join(", ")}]</p>
         <div className="relative flex flex-col gap-2 text-red-700">
           <motion.p
             id="pivot-text"
