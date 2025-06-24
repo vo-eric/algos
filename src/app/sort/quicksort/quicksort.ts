@@ -4,6 +4,8 @@ export interface Snapshot {
   pivot: number;
   array: number[];
   result?: number[];
+  sortedRight?: number[];
+  sortedLeft?: number[];
 }
 
 interface QuickSortResult {
@@ -42,6 +44,8 @@ export const quickSort = (array: number[]): QuickSortResult => {
       pivot,
       right,
       result,
+      sortedRight,
+      sortedLeft,
     });
 
     return result;

@@ -6,7 +6,7 @@ import NumberCard from "~/components/NumberCard";
 import { useEffect } from "react";
 
 export default function Snapshot({
-  snapshot: { left, right, pivot, array },
+  snapshot: { pivot, array },
   currentIndex,
   elementIndex,
 }: {

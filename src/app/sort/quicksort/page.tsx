@@ -12,7 +12,7 @@ DISPLAY THE LEFT AND RIGHT ARRAY AT EACH ITERATION
 */
 
 export default function QuickSort() {
-  const [currentIndex, setCurrentIndex] = useState(-1);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const nums = [3, 5, 1, 8, 4, 2, -1, 9];
   // const nums = [5, 3, 8, 4, 2, -1];
   const { snapshots, sorted } = quickSort(nums);
@@ -41,12 +41,10 @@ export default function QuickSort() {
       <div className="flex items-center">
         <div className="flex w-full flex-col items-center gap-10">
           <h1 className="text-4xl font-bold">Quick Sort</h1>
-          <p>Current Index:{currentIndex}</p>
           <div className="flex flex-col gap-10">
             {/* need to reverse the snapshots to show the correct order */}
             {reversedSnapshots.map((snapshot, index) => {
               if (currentIndex > index) {
-                console.log("snapshot", snapshot);
                 return (
                   <Snapshot
                     key={index}
@@ -60,15 +58,21 @@ export default function QuickSort() {
             })}
           </div>
           {/* results */}
-          <div>
+          <div className="m-auto mt-[20px] flex w-full flex-col gap-10">
             {currentIndex > (MAX_INDEX - 1) / 2 &&
               snapshots.map((snapshot, i) => {
                 // Calculate the adjusted index for results (subtract the halfway point)
                 const resultIndex = i + Math.floor((MAX_INDEX - 1) / 2) + 2;
                 // Only show results for snapshots that have been processed after the halfway point
                 if (currentIndex >= resultIndex) {
-                  console.log("snapshot.result", snapshot.result);
-                  return <ReturnedSnapshot key={i} snapshot={snapshot} />;
+                  return (
+                    <ReturnedSnapshot
+                      key={i}
+                      snapshot={snapshot}
+                      currentIndex={currentIndex}
+                      resultIndex={resultIndex}
+                    />
+                  );
                 }
                 return null;
               })}
