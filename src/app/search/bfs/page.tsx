@@ -1,40 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
-import { ResponsiveTreeCanvas } from "@nivo/tree";
+import numIslands from "./algo";
+import Snapshot from "./Snapshot";
 
-const ADJACENCIES = {
-  name: "A",
-  children: [
-    {
-      name: "B",
-      children: [
-        {
-          name: "D",
-          loc: 100,
-        },
-        {
-          name: "E",
-          loc: 200,
-        },
-      ],
-    },
-    {
-      name: "C",
-      children: [
-        {
-          name: "F",
-          loc: 5212,
-        },
-        {
-          name: "G",
-          loc: 147016,
-        },
-      ],
-    },
-  ],
-};
 // const ADJACENCIES = {
 //   A: ["B", "C"],
 //   B: ["D", "E"],
@@ -54,36 +23,43 @@ const ADJACENCIES = {
 // };
 
 export default function BFS() {
-  const [activeNodes, setActiveNodes] = useState<string[]>(["B", "C"]);
+  const snapshots = numIslands([
+    ["1", "1", "1", "1", "0"],
+    ["1", "1", "0", "1", "0"],
+    ["1", "1", "0", "0", "0"],
+    ["0", "0", "0", "0", "0"],
+  ]);
+
+  console.log(snapshots);
+
+  const [index, setIndex] = useState(0);
+
   return (
     <>
-      <div>hi</div>
-      <div style={{ height: "600px", width: "100%" }}>
-        <ResponsiveTreeCanvas /* or TreeCanvas for fixed dimensions */
-          data={ADJACENCIES}
-          mode="tree"
-          layout="top-to-bottom"
-          identity="name"
-          activeNodeSize={24}
-          inactiveNodeSize={12}
-          nodeColor={{ scheme: "tableau10" }}
-          fixNodeColorAtDepth={1}
-          linkThickness={2}
-          activeLinkThickness={8}
-          inactiveLinkThickness={2}
-          linkColor={{ from: "target.color", modifiers: [["opacity", 0.4]] }}
-          margin={{ top: 90, right: 90, bottom: 90, left: 90 }}
-          motionConfig={{
-            mass: 259,
-            tension: 170,
-            friction: 26,
-            clamp: false,
-            precision: 0.01,
-            velocity: 0,
-          }}
-          meshDetectionRadius={80}
-          pixelRatio={2}
+      <div
+        className="bg-url-[/ocean.jpeg] min-h-screen bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/ocean.jpeg')" }}
+      >
+        {/* {snapshots.map((snapshot, i) => { */}
+        <Snapshot
+          snapshot={snapshots[index].grid}
+          currentCell={snapshots[index].currentCell}
         />
+        {/* })} */}
+      </div>
+      <div>
+        <button
+          onClick={() => setIndex(Math.max(0, index - 1))}
+          className="cursor-pointer rounded-md bg-blue-500 p-2 text-white"
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => setIndex(Math.min(snapshots.length - 1, index + 1))}
+          className="cursor-pointer rounded-md bg-blue-500 p-2 text-white"
+        >
+          Next
+        </button>
       </div>
     </>
   );
