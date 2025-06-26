@@ -5,17 +5,6 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {
-  experimental: {
-    // Disable lightningcss temporarily if needed
-    optimizePackageImports: ["@tailwindcss/postcss"],
-  },
-  // Alternative: Force PostCSS 8
-  postcss: {
-    plugins: {
-      "@tailwindcss/postcss": {},
-    },
-  },
-};
+const config = {};
 
 export default config;
