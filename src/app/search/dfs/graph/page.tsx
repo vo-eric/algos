@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Tree } from "react-d3-tree";
+import dynamic from "next/dynamic";
 import { data } from "./data";
 import { generateSnapshots } from "./dfs";
 
@@ -14,6 +14,11 @@ export interface Snapshot {
   activeNode: string;
   visitedNodes: string[];
 }
+
+const Tree = dynamic(() => import("react-d3-tree").then((mod) => mod.Tree), {
+  ssr: false,
+  loading: () => <div className="text-center text-xl">Loading tree...</div>,
+});
 
 export default function DfsGraph() {
   const [index, setIndex] = useState<number>(0);
