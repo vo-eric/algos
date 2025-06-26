@@ -3,7 +3,12 @@ export interface TreeNode {
   children?: TreeNode[];
 }
 
-export interface Snapshot {
+export interface BFSSnapshot {
+  activeNode: string;
+  queue?: string[];
+}
+
+export interface DFSSnapshot {
   activeNode: string;
   visitedNodes: string[];
 }
