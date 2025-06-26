@@ -1,9 +1,7 @@
-import { type Snapshot, type TreeNode } from "./page";
+import { type DFSSnapshot, type TreeNode } from "~/lib/types/searchTypes";
 
-export const generateSnapshots = (
-  root: TreeNode,
-): { activeNode: string; visitedNodes: string[] }[] => {
-  const snapshots: Snapshot[] = [];
+export const generateSnapshots = (root: TreeNode): DFSSnapshot[] => {
+  const snapshots: DFSSnapshot[] = [];
 
   const dfs = (node: TreeNode | null | undefined, visitedNodes: string[]) => {
     if (!node) return;

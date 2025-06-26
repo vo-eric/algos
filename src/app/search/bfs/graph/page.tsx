@@ -1,22 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { data } from "~/lib/tree";
-import { generateSnapshots } from "./dfs";
+import { generateSnapshots } from "./bfs";
+import dynamic from "next/dynamic";
 
 const Tree = dynamic(() => import("react-d3-tree").then((mod) => mod.Tree), {
   ssr: false,
   loading: () => <div className="text-center text-xl">Loading tree...</div>,
 });
 
-export default function DfsGraph() {
-  const [index, setIndex] = useState<number>(0);
+export default function BFSGraph() {
+  const [index, setIndex] = useState(0);
   const snapshots = generateSnapshots(data);
   const [activeNode, setActiveNode] = useState<string>(snapshots[0].activeNode);
-  const [visitedNodes, setVisitedNodes] = useState<string[]>(
-    snapshots[0].visitedNodes,
-  );
+  const [queue, setQueue] = useState<string[] | undefined>(snapshots[0].queue);
 
   const handleClick = (direction: "previous" | "next") => {
     const updatedIndex =
@@ -26,7 +24,7 @@ export default function DfsGraph() {
     setIndex(updatedIndex);
     const snapshot = snapshots[updatedIndex];
     setActiveNode(snapshot.activeNode);
-    setVisitedNodes(snapshot.visitedNodes);
+    setQueue(snapshot.queue);
   };
 
   return (
@@ -59,13 +57,23 @@ export default function DfsGraph() {
             console.log(node);
           }}
           renderCustomNodeElement={(node) => {
-            if (
-              activeNode === node.nodeDatum.name ||
-              visitedNodes.includes(node.nodeDatum.name)
-            ) {
+            if (activeNode === node.nodeDatum.name) {
               return (
                 <g>
                   <circle r={20} stroke="red" strokeWidth={2} fill="white" />
+                  <text
+                    textAnchor="middle"
+                    alignmentBaseline="middle"
+                    fill="black"
+                  >
+                    {node.nodeDatum.name}
+                  </text>
+                </g>
+              );
+            } else if (queue?.includes(node.nodeDatum.name)) {
+              return (
+                <g>
+                  <circle r={20} stroke="blue" strokeWidth={2} fill="white" />
                   <text
                     textAnchor="middle"
                     alignmentBaseline="middle"
