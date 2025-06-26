@@ -54,8 +54,8 @@ export default function BFS() {
           <section>
             There is a scary fire that is spreading through every island until
             it reaches the water and fizzles out. Somehow every island is being
-            targeted by spontaneous fires. Don&apos;t ask me how that works - it
-            just does.
+            targeted by spontaneous fires from the top down. Don&apos;t ask me
+            how that works - it just does.
           </section>
         </div>
       </div>
