@@ -1,4 +1,4 @@
-import { type Snapshot, type TreeNode } from "./page";
+import { type Snapshot, type TreeNode } from "~/lib/types/searchTypes";
 
 export const generateSnapshots = (
   root: TreeNode,

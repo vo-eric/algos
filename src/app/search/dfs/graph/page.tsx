@@ -2,18 +2,8 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { data } from "./data";
+import { data } from "~/lib/tree";
 import { generateSnapshots } from "./dfs";
-
-export interface TreeNode {
-  name: string;
-  children?: TreeNode[];
-}
-
-export interface Snapshot {
-  activeNode: string;
-  visitedNodes: string[];
-}
 
 const Tree = dynamic(() => import("react-d3-tree").then((mod) => mod.Tree), {
   ssr: false,

@@ -1,4 +1,4 @@
-import { type TreeNode } from "./page";
+import { type TreeNode } from "~/lib/types/searchTypes";
 
 export const data: TreeNode = {
   name: "A",

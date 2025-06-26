@@ -4,7 +4,7 @@ import { useState } from "react";
 import numIslands from "./algo";
 import Snapshot from "./Snapshot";
 
-export default function BFS() {
+export default function DFS() {
   const snapshots = numIslands([
     ["1", "1", "0", "0", "0", "1", "0", "0"],
     ["1", "1", "1", "1", "0", "0", "0", "0"],
