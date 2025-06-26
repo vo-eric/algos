@@ -1,138 +1,53 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Tree } from "react-d3-tree";
+import { data } from "./data";
+import { generateSnapshots } from "./dfs";
 
 export interface TreeNode {
   name: string;
   children?: TreeNode[];
 }
 
-const data: TreeNode = {
-  name: "A",
-  children: [
-    {
-      name: "B",
-      children: [
-        {
-          name: "D",
-          children: [
-            {
-              name: "H",
-              children: [],
-            },
-            {
-              name: "I",
-              children: [],
-            },
-          ],
-        },
-        {
-          name: "E",
-          children: [
-            {
-              name: "J",
-              children: [],
-            },
-            {
-              name: "K",
-              children: [],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "C",
-      children: [
-        {
-          name: "F",
-          children: [
-            {
-              name: "L",
-              children: [],
-            },
-            {
-              name: "M",
-              children: [],
-            },
-          ],
-        },
-        {
-          name: "G",
-          children: [
-            {
-              name: "N",
-              children: [],
-            },
-            {
-              name: "O",
-              children: [],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-
 export interface Snapshot {
   activeNode: string;
   visitedNodes: string[];
 }
 
-const generateSnapshots = (
-  root: TreeNode,
-): { activeNode: string; visitedNodes: string[] }[] => {
-  const snapshots: Snapshot[] = [];
-
-  const dfs = (node: TreeNode | null | undefined, visitedNodes: string[]) => {
-    if (!node) return;
-
-    const snapshot = {
-      activeNode: node.name,
-      visitedNodes,
-    };
-
-    snapshots.push(snapshot);
-    if (node.children?.length === 0) {
-      return;
-    }
-    dfs(node.children?.[0], [...snapshot.visitedNodes, node.name]);
-
-    snapshots.push(snapshot);
-    dfs(node.children?.[1], [...snapshot.visitedNodes, node.name]);
-  };
-
-  dfs(root, []);
-  return snapshots;
-};
-
 export default function DfsGraph() {
   const [index, setIndex] = useState<number>(0);
-  const [activeNodes, setActiveNodes] = useState<string>();
-  const [visitedNodes, setVisitedNodes] = useState<string[]>([]);
   const snapshots = generateSnapshots(data);
+  const [activeNodes, setActiveNodes] = useState<string>(
+    snapshots[0].activeNode,
+  );
+  const [visitedNodes, setVisitedNodes] = useState<string[]>(
+    snapshots[0].visitedNodes,
+  );
 
-  useEffect(() => {
-    const snapshot = snapshots[index];
-
+  const handleClick = (direction: "previous" | "next") => {
+    const updatedIndex =
+      direction === "previous"
+        ? Math.max(0, index - 1)
+        : Math.min(snapshots.length - 1, index + 1);
+    setIndex(updatedIndex);
+    const snapshot = snapshots[updatedIndex];
     setActiveNodes(snapshot.activeNode);
     setVisitedNodes(snapshot.visitedNodes);
-  }, [index, snapshots]);
+  };
 
   return (
     <div className="mx-auto flex w-[80%] flex-col items-center justify-center">
       <h1>DfsGraph</h1>
       <div>
         <button
-          onClick={() => setIndex(Math.max(index - 1, 0))}
+          onClick={() => handleClick("previous")}
           className="text-whites rounded-md bg-blue-500 px-4 py-2"
         >
           Previous
         </button>
         <button
-          onClick={() => setIndex(Math.min(index + 1, snapshots.length - 1))}
+          onClick={() => handleClick("next")}
           className="text-whites rounded-md bg-blue-500 px-4 py-2"
         >
           Next
