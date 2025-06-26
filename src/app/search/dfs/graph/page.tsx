@@ -13,9 +13,7 @@ const Tree = dynamic(() => import("react-d3-tree").then((mod) => mod.Tree), {
 export default function DfsGraph() {
   const [index, setIndex] = useState<number>(0);
   const snapshots = generateSnapshots(data);
-  const [activeNodes, setActiveNodes] = useState<string>(
-    snapshots[0].activeNode,
-  );
+  const [activeNode, setActiveNode] = useState<string>(snapshots[0].activeNode);
   const [visitedNodes, setVisitedNodes] = useState<string[]>(
     snapshots[0].visitedNodes,
   );
@@ -27,7 +25,7 @@ export default function DfsGraph() {
         : Math.min(snapshots.length - 1, index + 1);
     setIndex(updatedIndex);
     const snapshot = snapshots[updatedIndex];
-    setActiveNodes(snapshot.activeNode);
+    setActiveNode(snapshot.activeNode);
     setVisitedNodes(snapshot.visitedNodes);
   };
 
@@ -62,7 +60,7 @@ export default function DfsGraph() {
           }}
           renderCustomNodeElement={(node) => {
             if (
-              activeNodes === node.nodeDatum.name ||
+              activeNode === node.nodeDatum.name ||
               visitedNodes.includes(node.nodeDatum.name)
             ) {
               return (
