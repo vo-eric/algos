@@ -29,7 +29,7 @@ export default function BFSGraph() {
 
   return (
     <div className="mx-auto flex w-[80%] flex-col items-center justify-center">
-      <h1>DfsGraph</h1>
+      <h1>BFS Graph</h1>
       <div>
         <button
           onClick={() => handleClick("previous")}
