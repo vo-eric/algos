@@ -28,7 +28,7 @@ const afterNow = (events: Event[], now: number): string => {
   for (const event of events) {
     const { title, start } = event;
 
-    if (start > now) {
+    if (start >= now) {
       if (!result.length || start < result[1]) {
         result = [title, start];
       }
