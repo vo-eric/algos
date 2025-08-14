@@ -22,7 +22,7 @@ interface Event {
  * Time Complexity: O(n) where is the number of events
  * Space complexity: O(1)
  */
-const afterNow = (events: Event[], now: number): string => {
+const afterNow = (events: Event[], now: number): string | null => {
   let result: [string, number] = [] as unknown as [string, number];
 
   for (const event of events) {
@@ -35,6 +35,9 @@ const afterNow = (events: Event[], now: number): string => {
     }
   }
 
+  if (!result[0]) {
+    return null;
+  }
   return result[0];
 };
 
