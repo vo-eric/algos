@@ -14,7 +14,7 @@ const PASSING_PERCENTAGE = 0.7;
 
 /**
  * Time Complexity: O(n * m) where n is the number of assignments and m is the number of students
- * Space Complexity: O(n) where n is the number of assignments
+ * Space Complexity: max(O(n), O(m)) where n is the number of assignments and m is the number of students
  */
 const passingStudents = (assignments: Assignments): string[] => {
   const result: string[] = [];
