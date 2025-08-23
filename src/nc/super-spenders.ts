@@ -38,16 +38,26 @@ type Order = {
 };
 /*
 
-set result array
+set result set
 create customerOrderData map/object
 iterate through order data
   add amount to customerData
-    if amount is greater than 100, add it to the result
+    if amount is greater than 100
+      find the customer in the array and add it to the set
 
 */
+/**
+ * Time Complexity: O(m + n), where m is the length of the customers array and n is the length of the orders array
+ * Space Complexity: O(n), where n is the number of customers
+ */
 const getSuperSpenders = (customers: Customer[], orders: Order[]): string[] => {
   const superSpenders = new Set<string>();
   const customerOrderData: Record<number, number> = {};
+  const customersObject: Record<number, Customer> = {};
+
+  for (const customer of customers) {
+    customersObject[customer.id] = customer;
+  }
 
   for (const order of orders) {
     const { customerId, amount } = order;
@@ -55,17 +65,15 @@ const getSuperSpenders = (customers: Customer[], orders: Order[]): string[] => {
       (customerOrderData[customerId] ?? 0) + amount;
 
     if (customerOrderData[customerId] > 100) {
-      // console.log("customer data", customerId, customers[customerId]);
-      // console.log("inside", customers[customerId]);
-      const customer = customers.find((customer) => customer.id === customerId);
-      superSpenders.add(customer!.email);
+      const { email } = customersObject[customerId];
+      superSpenders.add(email);
     }
   }
 
   return [...superSpenders];
 };
 
-// console.log(getSuperSpenders(customers, orderData));
+console.log(getSuperSpenders(customers, orderData));
 
 // --- second example ---
 
@@ -87,4 +95,4 @@ const orderData2 = [
 
 const expectedOutput2 = ["ben@email.com"];
 
-console.log(getSuperSpenders(customers2, orderData2));
+// console.log(getSuperSpenders(customers2, orderData2));
