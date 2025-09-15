@@ -5,6 +5,10 @@
  * one is a permutation of the other.
  */
 
+/**
+ * Time: O(n + m)
+ * Space: O(n)
+ */
 const checkPermutation = (s1: string, s2: string): boolean => {
   const s1Map = new Map();
 
