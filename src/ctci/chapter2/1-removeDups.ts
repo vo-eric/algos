@@ -1,4 +1,4 @@
-import { listToArray } from "./utils/index.ts";
+import { listToArray, ListNode } from "./utils/index.ts";
 
 /**
  * Remove Dups:
@@ -9,16 +9,6 @@ import { listToArray } from "./utils/index.ts";
  * How would you solve this problem if a temporary buffer is not allowed?
  *
  */
-
-class ListNode {
-  value: number;
-  next: ListNode | null;
-
-  constructor(value: number, next: ListNode | null = null) {
-    this.value = value;
-    this.next = next;
-  }
-}
 
 /**
  * Time: O(n)

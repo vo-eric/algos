@@ -1,7 +1,12 @@
-export type ListNode = {
+export class ListNode {
   value: number;
   next: ListNode | null;
-};
+
+  constructor(value: number, next: ListNode | null = null) {
+    this.value = value;
+    this.next = next;
+  }
+}
 
 export const listToArray = (head: ListNode): number[] => {
   const result = [];
