@@ -62,5 +62,16 @@ const stringRotation = (s1: string, s2: string): boolean => {
   return false;
 };
 
-console.log(stringRotation("erbottlewat", "waterbottle"));
-console.log(stringRotation("almmaterm", "matermalm"));
+/**
+ * Time: O(n)
+ * Space: O(n)
+ */
+
+const stringRotationOptimal = (s1: string, s2: string): boolean => {
+  const updatedS1 = s1 + s1;
+
+  return updatedS1.includes(s2);
+};
+
+console.log(stringRotationOptimal("erbottlewat", "waterbottle"));
+console.log(stringRotationOptimal("almmaterm", "matermalm"));
