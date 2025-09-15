@@ -8,7 +8,7 @@ export class ListNode {
   }
 }
 
-export const listToArray = (head: ListNode): number[] => {
+export const listToArray = (head: ListNode | null): number[] => {
   const result = [];
   let curr: ListNode | null = head;
 
