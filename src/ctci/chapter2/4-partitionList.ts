@@ -12,6 +12,10 @@
 
 import { ListNode, listToArray } from "./utils/index.ts";
 
+/**
+ * Time: O(n)
+ * Space: O(n)
+ */
 const partition = (
   head: ListNode | null,
   partition: number,
