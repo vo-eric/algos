@@ -11,7 +11,7 @@ import { ListNode } from "./utils/index.ts";
 
 /**
  * Time: O(n)
- * Space: O(n)
+ * Space: O(1)
  */
 const intersection = (
   headA: ListNode | null,
