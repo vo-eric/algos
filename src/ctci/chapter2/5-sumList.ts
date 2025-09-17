@@ -18,6 +18,10 @@
 
 import { ListNode, listToArray } from "./utils/index.ts";
 
+/**
+ * Time: O(n)
+ * Space: O(n)
+ */
 const sumList = (
   list1: null | ListNode,
   list2: null | ListNode,
