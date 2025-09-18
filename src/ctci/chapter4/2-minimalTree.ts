@@ -7,26 +7,32 @@
 
 import { TreeNode } from "./utils/index.ts";
 
+/**
+ * Time: O(logn)
+ * Space: O(logn)
+ */
 const minimalTree = (nums: number[]) => {
   /*
     get the middle element and that will be the root
     the left will be all elements left of that
     the right will be all elements right of that  
   */
-  const buildTree = (nums: number[]): TreeNode | null => {
-    if (!nums.length) {
+  const buildTree = (start: number, end: number): TreeNode | null => {
+    if (start > end) {
       return null;
     }
-    const mid = Math.floor(nums.length / 2);
-    const left = nums.slice(0, mid);
-    const right = nums.slice(mid + 1);
+    const mid = Math.floor((start + end) / 2);
 
-    const root = new TreeNode(nums[mid], buildTree(left), buildTree(right));
+    const root = new TreeNode(
+      nums[mid],
+      buildTree(start, mid - 1),
+      buildTree(mid + 1, end),
+    );
 
     return root;
   };
 
-  return buildTree(nums);
+  return buildTree(0, nums.length - 1);
 };
 
 const nums1 = [1, 2, 3, 4, 5, 6];
