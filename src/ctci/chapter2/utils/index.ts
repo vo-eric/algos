@@ -1,14 +1,14 @@
 export class ListNode {
-  value: number;
+  value: number | string;
   next: ListNode | null;
 
-  constructor(value: number, next: ListNode | null = null) {
+  constructor(value: number | string, next: ListNode | null = null) {
     this.value = value;
     this.next = next;
   }
 }
 
-export const listToArray = (head: ListNode | null): number[] => {
+export const listToArray = (head: ListNode | null): (number | string)[] => {
   const result = [];
   let curr: ListNode | null = head;
 
