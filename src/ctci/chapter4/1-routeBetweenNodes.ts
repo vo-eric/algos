@@ -7,6 +7,10 @@
 
 import { GraphNode } from "./utils/index.ts";
 
+/**
+ * Time: O(V + E)
+ * Space: O(V)
+ */
 const routeBetweenNodes = (nodeA: GraphNode, nodeB: GraphNode): boolean => {
   const visited = new Set<GraphNode>();
   const queue = [nodeA];
@@ -36,6 +40,10 @@ const routeBetweenNodes = (nodeA: GraphNode, nodeB: GraphNode): boolean => {
   return false;
 };
 
+/**
+ * Time: O(V + E)
+ * SpaceL O(V)
+ */
 const routeBetweenNodesDFS = (nodeA: GraphNode, nodeB: GraphNode): boolean => {
   const visited = new Set<GraphNode>();
 
