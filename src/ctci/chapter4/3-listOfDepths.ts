@@ -17,6 +17,10 @@ export class ListNode {
   }
 }
 
+/**
+ * Time: O(n)
+ * Space: O(n)
+ */
 const listOfDepths = (root: TreeNode): ListNode[] => {
   const result = [];
   const queue = [root];

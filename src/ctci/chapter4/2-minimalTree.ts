@@ -8,7 +8,7 @@
 import { TreeNode } from "./utils/index.ts";
 
 /**
- * Time: O(logn)
+ * Time: O(n)
  * Space: O(logn)
  */
 const minimalTree = (nums: number[]) => {
