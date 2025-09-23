@@ -9,6 +9,10 @@
 
 import { TreeNode } from "./utils/index.ts";
 
+/**
+ * Time: O(n)
+ * Space: O(h)
+ */
 const checkSubtree = (root1: TreeNode, root2: TreeNode): boolean => {
   //find the node in root1 that corresponds to the root in node2
   const rootNode = findNode(root1, root2);
